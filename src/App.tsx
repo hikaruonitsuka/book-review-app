@@ -1,8 +1,11 @@
+import Layout from '@/components/Layout';
+import { Router } from '@/router/Router';
+
 function App() {
   return (
-    <>
-      <p className="p-4">テスト</p>
-    </>
+    <Layout>
+      <Router />
+    </Layout>
   );
 }
 
