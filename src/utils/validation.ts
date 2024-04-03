@@ -3,7 +3,7 @@ import * as z from 'zod';
 // imageのtype指定
 const IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
-export const FormSchema = z.object({
+export const SignUpSchema = z.object({
   name: z.string().min(1, { message: 'ユーザー名を入力してください' }),
   email: z
     .string()
@@ -27,4 +27,20 @@ export const FormSchema = z.object({
     }),
 });
 
-export type FormSchemaType = z.infer<typeof FormSchema>;
+export type SignUpSchemaType = z.infer<typeof SignUpSchema>;
+
+export const LoginSchema = z.object({
+  email: z
+    .string()
+    .min(1, { message: 'メールアドレスを入力してください' })
+    .email({ message: '無効なメールアドレスです' }),
+  password: z
+    .string()
+    .min(8, 'パスワードは8文字以上で半角英数字混合で入力してください')
+    .regex(
+      /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i,
+      'パスワードは半角英数字混合で入力してください',
+    ),
+});
+
+export type LoginSchemaType = z.infer<typeof LoginSchema>;

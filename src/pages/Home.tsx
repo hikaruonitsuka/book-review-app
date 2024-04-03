@@ -1,14 +1,11 @@
 import Container from '@/components/Container';
-import { useAuth } from '@/providers/authProvider';
+import { useAuth } from '@/hooks/useAuth';
 
 const Home = () => {
-  const { user } = useAuth();
-  console.log(user);
-
+  const { isLogin } = useAuth();
   return (
     <Container>
-      <p>{user?.name}</p>
-      <p>{user?.iconUrl}</p>
+      {isLogin() ? <div>ログイン済み</div> : <div>未ログイン</div>}
     </Container>
   );
 };

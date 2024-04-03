@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useCookies } from 'react-cookie';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
@@ -11,10 +12,10 @@ import Button from '@/components/Button';
 import Container from '@/components/Container';
 import ErrorText from '@/components/form/ErrorText';
 import { API_URL } from '@/config';
-import { FormSchema, FormSchemaType } from '@/utils/validation';
+import { SignUpSchema, SignUpSchemaType } from '@/utils/validation';
 
 // 画像圧縮処理
-const compressFile = (file: File) => {
+const compressFile = (file: File): Promise<File> => {
   return new Promise((resolve, reject) => {
     new Compressor(file, {
       width: 400,
@@ -22,7 +23,13 @@ const compressFile = (file: File) => {
       quality: 0.8,
       resize: 'cover',
       convertSize: 1000000,
-      success: resolve,
+      success(result) {
+        const compressedFile = new File([result], file.name, {
+          type: result.type,
+          lastModified: Date.now(),
+        });
+        resolve(compressedFile);
+      },
       error: reject,
     });
   });
@@ -31,12 +38,15 @@ const compressFile = (file: File) => {
 const SignUp = () => {
   const [, setCookie] = useCookies(['token']);
   const [previewUrl, setPreviewUrl] = useState<string>('');
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormSchemaType>({
-    resolver: zodResolver(FormSchema),
+  } = useForm<SignUpSchemaType>({
+    resolver: zodResolver(SignUpSchema),
   });
 
   // ファイルを圧縮してプレビュー表示させる
@@ -62,7 +72,8 @@ const SignUp = () => {
     });
   };
 
-  const onSignUp: SubmitHandler<FormSchemaType> = async (data) => {
+  // サインアップ処理
+  const onSignUp: SubmitHandler<SignUpSchemaType> = async (data) => {
     try {
       const user = {
         name: data.name,
@@ -71,13 +82,24 @@ const SignUp = () => {
       };
 
       // JWT tokenの設定
-      const response = await axios.post(`${API_URL}/users`, user);
-      const token = response.data.token;
+      const userResponse = await axios.post(`${API_URL}/users`, user);
+      const token = userResponse.data.token;
       setCookie('token', token, { path: '/' });
 
-      // const compressedFile = await compressFile(data.file);
+      // 添付されたファイルを圧縮し、発行されたtokenを利用してアップロード
+      const compressedFile = await compressFile(data.file);
+      const formData = new FormData();
+      formData.append('icon', compressedFile);
+
+      await axios.post(`${API_URL}/uploads`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      navigate('/');
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 

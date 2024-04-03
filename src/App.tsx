@@ -1,12 +1,7 @@
-import Layout from '@/components/Layout';
 import { Router } from '@/router/Router';
 
 function App() {
-  return (
-    <Layout>
-      <Router />
-    </Layout>
-  );
+  return <Router />;
 }
 
 export default App;
