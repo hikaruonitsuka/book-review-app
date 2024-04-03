@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { useCookies } from 'react-cookie';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +15,7 @@ import { LoginSchemaType, LoginSchema } from '@/utils/validation';
 
 const SignIn = () => {
   const [, setCookie] = useCookies(['token']);
+  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -39,6 +42,7 @@ const SignIn = () => {
 
       navigate('/');
     } catch (error) {
+      setError('メールアドレスまたはパスワードが正しくありません');
       console.log(error);
     }
   };
@@ -48,46 +52,51 @@ const SignIn = () => {
       <Container>
         <section className="flex w-full flex-col gap-y-14">
           <h2 className="text-center text-2xl font-bold">サインイン</h2>
-          <form
-            className="flex flex-col items-center justify-center gap-y-12"
-            onSubmit={handleSubmit(onSignIn)}
-          >
-            <div className="flex w-full flex-1 flex-col gap-y-4">
-              <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold" htmlFor="email">
-                  メールアドレス
-                </label>
-                <div className="flex w-full flex-col gap-y-1">
-                  <input
-                    className="w-full rounded border px-2 py-1"
-                    id="email"
-                    autoComplete="email"
-                    {...register('email')}
-                  />
-                  {errors.email?.message && (
-                    <ErrorText>{errors.email?.message}</ErrorText>
-                  )}
+          <div className="flex flex-col gap-y-4">
+            {error && <ErrorText>{error}</ErrorText>}
+            <form
+              className="flex flex-col items-center justify-center gap-y-12"
+              onSubmit={handleSubmit(onSignIn)}
+            >
+              <div className="flex w-full flex-1 flex-col gap-y-4">
+                <div className="flex flex-col items-start gap-y-2">
+                  <label className="font-bold" htmlFor="email">
+                    メールアドレス
+                  </label>
+                  <div className="flex w-full flex-col gap-y-1">
+                    <input
+                      className="w-full rounded border px-2 py-1"
+                      id="email"
+                      autoComplete="email"
+                      data-cy="input-email"
+                      {...register('email')}
+                    />
+                    {errors.email?.message && (
+                      <ErrorText>{errors.email?.message}</ErrorText>
+                    )}
+                  </div>
+                </div>
+                <div className="flex flex-col items-start gap-y-2">
+                  <label className="font-bold" htmlFor="password">
+                    パスワード
+                  </label>
+                  <div className="flex w-full flex-col gap-y-1">
+                    <input
+                      className="w-full rounded border px-2 py-1"
+                      id="password"
+                      autoComplete="new-password"
+                      data-cy="input-password"
+                      {...register('password')}
+                    />
+                    {errors.password?.message && (
+                      <ErrorText>{errors.password?.message}</ErrorText>
+                    )}
+                  </div>
                 </div>
               </div>
-              <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold" htmlFor="password">
-                  パスワード
-                </label>
-                <div className="flex w-full flex-col gap-y-1">
-                  <input
-                    className="w-full rounded border px-2 py-1"
-                    id="password"
-                    autoComplete="new-password"
-                    {...register('password')}
-                  />
-                  {errors.password?.message && (
-                    <ErrorText>{errors.password?.message}</ErrorText>
-                  )}
-                </div>
-              </div>
-            </div>
-            <Button>サインイン</Button>
-          </form>
+              <Button>サインイン</Button>
+            </form>
+          </div>
         </section>
       </Container>
     </div>
