@@ -23,7 +23,10 @@
     "paths": {
       "@/*": ["src/*"],
       "~/*": ["public/*"]
-    }
+    },
+
+    // CommonJSのモジュールもES Modulesと同じ書き方で読み込めるようにする（jestのimport対応）
+    "esModuleInterop": true
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

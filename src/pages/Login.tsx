@@ -66,9 +66,11 @@ const SignIn = () => {
                   <div className="flex w-full flex-col gap-y-1">
                     <input
                       className="w-full rounded border px-2 py-1"
+                      type="email"
                       id="email"
                       autoComplete="email"
                       data-cy="input-email"
+                      data-testid="input-email"
                       {...register('email')}
                     />
                     {errors.email?.message && (
@@ -83,9 +85,11 @@ const SignIn = () => {
                   <div className="flex w-full flex-col gap-y-1">
                     <input
                       className="w-full rounded border px-2 py-1"
+                      type="password"
                       id="password"
                       autoComplete="new-password"
                       data-cy="input-password"
+                      data-testid="input-password"
                       {...register('password')}
                     />
                     {errors.password?.message && (
