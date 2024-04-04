@@ -1,7 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import Login from '@/pages/Login.tsx';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+
+import Login from '@/pages/Login.tsx';
 
 describe('ログインページ', () => {
   test('ログイン画面にメールアドレスとパスワード入力欄が存在する', () => {

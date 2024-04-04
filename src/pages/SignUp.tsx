@@ -137,7 +137,7 @@ const SignUp = () => {
                 <div className="flex w-full flex-col gap-y-1">
                   <input
                     className="w-full rounded border px-2 py-1"
-										type='email'
+                    type="email"
                     id="email"
                     autoComplete="email"
                     {...register('email')}
@@ -154,7 +154,7 @@ const SignUp = () => {
                 <div className="flex w-full flex-col gap-y-1">
                   <input
                     className="w-full rounded border px-2 py-1"
-										type='password'
+                    type="password"
                     id="password"
                     autoComplete="new-password"
                     {...register('password')}
