@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from '@/components/Layout';
 import { useAuth } from '@/hooks/useAuth';
+import CreateBookReview from '@/pages/CreateBookReview';
 import Home from '@/pages/Home';
 import SignIn from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
@@ -17,9 +18,13 @@ export const Router = () => {
             <>
               <Route path="/" element={<Home />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/new" element={<CreateBookReview />} />
             </>
           ) : (
-            <Route path="/" element={<SignUp />} />
+            <>
+              <Route path="/" element={<SignUp />} />
+              <Route path="/signup" element={<SignUp />} />
+            </>
           )}
           <Route path="/signin" element={<SignIn />} />
           <Route path="*" element={<NotFound />} />

@@ -3,6 +3,9 @@ import * as z from 'zod';
 // imageのtype指定
 const IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
+/**
+ * ユーザー登録時のバリデーション
+ */
 export const SignUpSchema = z.object({
   name: z.string().min(1, { message: 'ユーザー名を入力してください' }),
   email: z
@@ -29,6 +32,9 @@ export const SignUpSchema = z.object({
 
 export type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 
+/**
+ * ログイン時のバリデーション
+ */
 export const LoginSchema = z.object({
   email: z
     .string()
@@ -44,3 +50,17 @@ export const LoginSchema = z.object({
 });
 
 export type LoginSchemaType = z.infer<typeof LoginSchema>;
+
+/**
+ * 本のレビュー作成時のバリデーション
+ */
+export const CreateBookReview = z.object({
+  title: z.string().min(1, { message: '本のタイトルを入力してください' }),
+  url: z.string().min(1, { message: '本のURLを入力してください' }),
+  detail: z
+    .string()
+    .min(1, { message: '本についてのレビューを入力してください' }),
+  review: z.string(),
+});
+
+export type CreateBookReviewType = z.infer<typeof CreateBookReview>;
