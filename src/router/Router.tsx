@@ -4,6 +4,7 @@ import Layout from '@/components/Layout';
 import { useAuth } from '@/hooks/useAuth';
 import Home from '@/pages/Home';
 import SignIn from '@/pages/Login';
+import NotFound from '@/pages/NotFound';
 import SignUp from '@/pages/SignUp';
 
 export const Router = () => {
@@ -21,6 +22,7 @@ export const Router = () => {
             <Route path="/" element={<SignUp />} />
           )}
           <Route path="/signin" element={<SignIn />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </BrowserRouter>
