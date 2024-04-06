@@ -10,6 +10,10 @@ import axios from 'axios';
 import Button from '@/components/Button';
 import Container from '@/components/Container';
 import ErrorText from '@/components/form/ErrorText';
+import FormContainer from '@/components/form/FormContainer';
+import FormItem from '@/components/form/FormItem';
+import FormItemList from '@/components/form/FormItemList';
+import FormLabel from '@/components/form/FormLabel';
 import { API_URL } from '@/config';
 import { LoginSchemaType, LoginSchema } from '@/utils/validation';
 
@@ -49,20 +53,15 @@ const SignIn = () => {
 
   return (
     <div className="grid min-h-full place-items-center">
-      <Container>
+      <Container size="sm">
         <section className="flex w-full flex-col gap-y-14">
           <h2 className="text-center text-2xl font-bold">サインイン</h2>
           <div className="flex flex-col gap-y-4">
             {error && <ErrorText>{error}</ErrorText>}
-            <form
-              className="flex flex-col items-center justify-center gap-y-12"
-              onSubmit={handleSubmit(onSignIn)}
-            >
-              <div className="flex w-full flex-1 flex-col gap-y-4">
-                <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold" htmlFor="email">
-                    メールアドレス
-                  </label>
+            <FormContainer onSubmit={handleSubmit(onSignIn)}>
+              <FormItemList>
+                <FormItem>
+                  <FormLabel htmlFor="email">メールアドレス</FormLabel>
                   <div className="flex w-full flex-col gap-y-1">
                     <input
                       className="w-full rounded border px-2 py-1"
@@ -77,11 +76,9 @@ const SignIn = () => {
                       <ErrorText>{errors.email?.message}</ErrorText>
                     )}
                   </div>
-                </div>
-                <div className="flex flex-col items-start gap-y-2">
-                  <label className="font-bold" htmlFor="password">
-                    パスワード
-                  </label>
+                </FormItem>
+                <FormItem>
+                  <FormLabel htmlFor="password">パスワード</FormLabel>
                   <div className="flex w-full flex-col gap-y-1">
                     <input
                       className="w-full rounded border px-2 py-1"
@@ -96,10 +93,10 @@ const SignIn = () => {
                       <ErrorText>{errors.password?.message}</ErrorText>
                     )}
                   </div>
-                </div>
-              </div>
+                </FormItem>
+              </FormItemList>
               <Button>サインイン</Button>
-            </form>
+            </FormContainer>
           </div>
         </section>
       </Container>

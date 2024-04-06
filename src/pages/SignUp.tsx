@@ -11,6 +11,10 @@ import Compressor from 'compressorjs';
 import Button from '@/components/Button';
 import Container from '@/components/Container';
 import ErrorText from '@/components/form/ErrorText';
+import FormContainer from '@/components/form/FormContainer';
+import FormItem from '@/components/form/FormItem';
+import FormItemList from '@/components/form/FormItemList';
+import FormLabel from '@/components/form/FormLabel';
 import { API_URL } from '@/config';
 import { SignUpSchema, SignUpSchemaType } from '@/utils/validation';
 
@@ -53,7 +57,10 @@ const SignUp = () => {
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
 
-    if (!files || files.length < 0) return;
+    if (!files || files.length == 0) {
+      setPreviewUrl('');
+      return;
+    }
 
     const file = files[0];
     new Compressor(file, {
@@ -105,18 +112,13 @@ const SignUp = () => {
 
   return (
     <div className="grid min-h-full place-items-center">
-      <Container>
+      <Container size="sm">
         <section className="flex w-full flex-col gap-y-14">
           <h2 className="text-center text-2xl font-bold">ユーザー作成</h2>
-          <form
-            className="flex flex-col items-center justify-center gap-y-12"
-            onSubmit={handleSubmit(onSignUp)}
-          >
-            <div className="flex w-full flex-1 flex-col gap-y-4">
-              <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold" htmlFor="name">
-                  ユーザー名
-                </label>
+          <FormContainer onSubmit={handleSubmit(onSignUp)}>
+            <FormItemList>
+              <FormItem>
+                <FormLabel htmlFor="name">ユーザー名</FormLabel>
                 <div className="flex w-full flex-col gap-y-1">
                   <input
                     className="w-full rounded border px-2 py-1"
@@ -129,11 +131,9 @@ const SignUp = () => {
                     <ErrorText>{errors.name?.message}</ErrorText>
                   )}
                 </div>
-              </div>
-              <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold" htmlFor="email">
-                  メールアドレス
-                </label>
+              </FormItem>
+              <FormItem>
+                <FormLabel htmlFor="email">メールアドレス</FormLabel>
                 <div className="flex w-full flex-col gap-y-1">
                   <input
                     className="w-full rounded border px-2 py-1"
@@ -146,11 +146,9 @@ const SignUp = () => {
                     <ErrorText>{errors.email?.message}</ErrorText>
                   )}
                 </div>
-              </div>
-              <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold" htmlFor="password">
-                  パスワード
-                </label>
+              </FormItem>
+              <FormItem>
+                <FormLabel htmlFor="password">パスワード</FormLabel>
                 <div className="flex w-full flex-col gap-y-1">
                   <input
                     className="w-full rounded border px-2 py-1"
@@ -163,11 +161,9 @@ const SignUp = () => {
                     <ErrorText>{errors.password?.message}</ErrorText>
                   )}
                 </div>
-              </div>
-              <div className="flex flex-col items-start gap-y-2">
-                <label className="font-bold" htmlFor="file">
-                  アイコン
-                </label>
+              </FormItem>
+              <FormItem>
+                <FormLabel htmlFor="file">アイコン</FormLabel>
                 <div className="flex flex-col gap-y-1">
                   {previewUrl && (
                     <div className="aspect-square w-[100px] overflow-hidden rounded-full">
@@ -188,10 +184,10 @@ const SignUp = () => {
                     <ErrorText>{errors.file?.message}</ErrorText>
                   )}
                 </div>
-              </div>
-            </div>
+              </FormItem>
+            </FormItemList>
             <Button>作成する</Button>
-          </form>
+          </FormContainer>
         </section>
       </Container>
     </div>
