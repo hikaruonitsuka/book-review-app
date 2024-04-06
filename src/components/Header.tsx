@@ -15,9 +15,11 @@ const Header = () => {
   };
 
   return (
-    <header className="p-4">
-      <div className="mx-auto flex max-w-6xl justify-between">
-        <Link to="/">LOGO</Link>
+    <header className="py-4">
+      <div className="mx-auto flex max-w-6xl justify-between px-4">
+        <h1>
+          <Link to="/">LOGO</Link>
+        </h1>
         {isLogin() ? (
           <button type="button" onClick={logout}>
             ログアウト
