@@ -17,6 +17,7 @@ export const Router = () => {
           {isLogin() ? (
             <>
               <Route path="/" element={<Home />} />
+              <Route path="/books" element={<Home />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/new" element={<CreateBookReview />} />
             </>

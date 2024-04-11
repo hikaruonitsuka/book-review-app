@@ -14,3 +14,82 @@
     }
   }
 }
+
+.home {
+  --padding: 16px;
+
+  max-width: calc(1120px + calc(var(--padding) * 2));
+  margin-inline: auto;
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+  display: flex;
+  flex-direction: column;
+  row-gap: 64px;
+}
+
+.home__bookList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: 1fr;
+  gap: 24px;
+}
+
+.home__bookItem {
+  position: relative;
+}
+
+.home__bookLink {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+}
+
+.home__bookTitle {
+  line-height: 1.35;
+  font-size: 1.5em;
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.home__bookDetail {
+  padding-top: 8px;
+  border-top: 1px solid #9ca3af;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.home__bookReviewerGroup {
+  display: flex;
+  font-size: 0.875em;
+}
+
+.home__bookReviewer {
+  font-weight: bold;
+  color: #0891b2;
+}
+
+.home__bookMyReview {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  line-height: 1;
+  font-size: 0.75em;
+  font-weight: bold;
+  background-color: #f97316;
+  color: #fff;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.home__pagination {
+  display: flex;
+  justify-content: center;
+}
