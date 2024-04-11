@@ -17,8 +17,8 @@ const Header = () => {
   return (
     <header className="py-4">
       <div className="mx-auto flex max-w-6xl justify-between px-4">
-        <h1>
-          <Link to="/">LOGO</Link>
+        <h1 className="font-bold text-cyan-600">
+          <Link to="/">BOOK REVIEW APP</Link>
         </h1>
         {isLogin() ? (
           <button type="button" onClick={logout}>
