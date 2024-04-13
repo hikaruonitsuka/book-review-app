@@ -14,7 +14,7 @@ export const Router = () => {
     <BrowserRouter>
       <Layout>
         <Routes>
-          {isLogin() ? (
+          {isLogin ? (
             <>
               <Route path="/" element={<Home />} />
               <Route path="/books" element={<Home />} />

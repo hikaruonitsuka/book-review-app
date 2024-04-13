@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useCallback, useMemo, useState } from 'react';
 
 import { useCookies } from 'react-cookie';
 
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [cookies] = useCookies(['token']);
   const [user, setUser] = useState<UserType | null>(null);
 
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
     try {
       if (cookies.token) {
         const response = await axios.get(`${API_URL}/users`, {
@@ -34,12 +34,12 @@ export const AuthProvider = ({ children }: Props) => {
     } catch (error) {
       console.error('ユーザー情報の取得に失敗しました', error);
     }
-  };
+  }, [cookies.token]);
 
-  const isLogin = () => {
+  const isLogin = useMemo(() => {
     // トークンの存在によりログイン状態を判断
     return Boolean(cookies['token']);
-  };
+  }, [cookies]);
 
   return (
     <AuthContext.Provider value={{ user, setUser, fetchUser, isLogin }}>

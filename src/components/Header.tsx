@@ -20,7 +20,7 @@ const Header = () => {
         <h1 className="font-bold text-cyan-600">
           <Link to="/">BOOK REVIEW APP</Link>
         </h1>
-        {isLogin() ? (
+        {isLogin ? (
           <button type="button" onClick={logout}>
             ログアウト
           </button>

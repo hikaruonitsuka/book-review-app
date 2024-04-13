@@ -14,7 +14,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   // ログインをしていない場合はログインページにリダイレクト
-  if (!isLogin()) {
+  if (!isLogin) {
     navigate('/login');
   }
 
