@@ -17,11 +17,11 @@ import FormLabel from '@/components/form/FormLabel';
 import { API_URL } from '@/config';
 import { LoginSchemaType, LoginSchema } from '@/utils/validation';
 
-const SignIn = () => {
+const Login = () => {
+  const navigate = useNavigate();
+
   const [, setCookie] = useCookies(['token']);
   const [error, setError] = useState<string | null>(null);
-
-  const navigate = useNavigate();
 
   const {
     register,
@@ -104,4 +104,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;

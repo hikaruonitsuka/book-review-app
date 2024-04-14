@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -5,8 +7,13 @@ import { useAuth } from '@/hooks/useAuth';
 
 const Header = () => {
   const [, , removeCookie] = useCookies(['token']);
-  const { setUser, isLogin } = useAuth();
+  const { user, setUser, fetchUser, isLogin } = useAuth();
   const navigate = useNavigate();
+
+  // ユーザー情報の取得
+  useEffect(() => {
+    fetchUser();
+  }, [fetchUser]);
 
   const logout = () => {
     removeCookie('token', { path: '/' });
@@ -16,16 +23,19 @@ const Header = () => {
 
   return (
     <header className="py-4">
-      <div className="mx-auto flex max-w-6xl justify-between px-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4">
         <h1 className="font-bold text-cyan-600">
           <Link to="/">BOOK REVIEW APP</Link>
         </h1>
         {isLogin ? (
-          <button type="button" onClick={logout}>
-            ログアウト
-          </button>
+          <div className="flex items-center gap-x-4">
+            <div className="overflow-hidden rounded-full">
+              <img src={user?.iconUrl} alt="" width="40" height="40" />
+            </div>
+            <span className="font-bold">{user?.name}</span>
+          </div>
         ) : (
-          <Link to="/signin">ログイン</Link>
+          <Link to="/login">ログイン</Link>
         )}
       </div>
     </header>

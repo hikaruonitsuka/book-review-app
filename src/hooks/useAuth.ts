@@ -1,11 +1,8 @@
 import { useContext } from 'react';
 
 import { AuthContext } from '@/providers/AuthProvider';
+import { AuthUserContextType } from '@/types/AuthUserContextType';
 
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('AuthProvider内でuseAuthを利用してください');
-  }
-  return context;
+export const useAuth = (): AuthUserContextType => {
+  return useContext<AuthUserContextType>(AuthContext);
 };

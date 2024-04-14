@@ -1,35 +1,35 @@
 import { useEffect, useState } from 'react';
 
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import Pagination from '@/components/Pagination';
 import ErrorText from '@/components/form/ErrorText';
 import { API_URL } from '@/config';
-import { useAuth } from '@/hooks/useAuth';
 import { useFetchBooks } from '@/hooks/useFetchBooks';
 import { Book } from '@/types/Book';
 
 const Home = () => {
-  const { isLogin } = useAuth();
-  const navigate = useNavigate();
-
-  // ログインをしていない場合はログインページにリダイレクト
-  if (!isLogin) {
-    navigate('/login');
-  }
-
   // URLクエリパラメータからoffsetを取得
   const [searchParams] = useSearchParams();
   const offset = parseInt(searchParams.get('offset') || '0', 10);
 
-  // useFetchBooksカスタムフックからoffsetを利用してデータを取得
+  // tokenを取得
+  const [cookies] = useCookies(['token']);
+  const token: string | undefined = cookies.token;
+
+  // useFetchBooksカスタムフックからoffsetとtokenを利用してデータを取得
   const {
     currentPageData: books,
     nextPageData,
     nextNextPageData,
     error,
     isLoading,
-  } = useFetchBooks({ url: `${API_URL}/books`, offset: offset });
+  } = useFetchBooks({
+    url: token ? `${API_URL}/books` : `${API_URL}/public/books`,
+    offset: offset,
+    token: token,
+  });
 
   // 最終ページと最終ページより1ページ前かどうかの状態を管理
   const [isLastPage, setIsLastPage] = useState(false);

@@ -5,15 +5,15 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 import { API_URL } from '@/config';
-import { AuthContextType } from '@/types/AuthContextType';
+import { AuthUserContextType } from '@/types/AuthUserContextType';
 import { UserType } from '@/types/UserType';
 
 type Props = {
   children: React.ReactNode;
 };
 
-export const AuthContext = createContext<AuthContextType | undefined>(
-  undefined,
+export const AuthContext = createContext<AuthUserContextType>(
+  {} as AuthUserContextType,
 );
 
 export const AuthProvider = ({ children }: Props) => {
@@ -41,9 +41,7 @@ export const AuthProvider = ({ children }: Props) => {
     return Boolean(cookies['token']);
   }, [cookies]);
 
-  return (
-    <AuthContext.Provider value={{ user, setUser, fetchUser, isLogin }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const value: AuthUserContextType = { user, setUser, fetchUser, isLogin };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
