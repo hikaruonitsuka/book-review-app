@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useSearchParams } from 'react-router-dom';
 
+import { ChevronRight } from 'lucide-react';
+
 import Pagination from '@/components/Pagination';
 import ErrorText from '@/components/form/ErrorText';
 import { API_URL } from '@/config';
@@ -78,11 +80,16 @@ const Home = () => {
         {books.map((book: Book) => (
           <article className="home__bookItem" key={book.id}>
             <Link to={`/books/${book.id}`} className="home__bookLink">
-              <h2 className="home__bookTitle">{book.title}</h2>
-              <p className="home__bookDetail">{book.detail}</p>
-              <div className="home__bookReviewerGroup">
-                <span>Reviewer:</span>
-                <span className="home__bookReviewer">{book.reviewer}</span>
+              <div className="home__bookGroup">
+                <h2 className="home__bookTitle">{book.title}</h2>
+                <p className="home__bookDetail">{book.detail}</p>
+                <div className="home__bookReviewerGroup">
+                  <span>Reviewer:</span>
+                  <span className="home__bookReviewer">{book.reviewer}</span>
+                </div>
+              </div>
+              <div className="home__bookLinkArrow">
+                <ChevronRight size={16} strokeWidth={2} />
               </div>
             </Link>
             {book.isMine && (
