@@ -69,6 +69,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+	word-break: break-word;
 }
 
 .home__bookDetail {
@@ -78,6 +79,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+	word-break: break-word;
 }
 
 .home__bookReviewerGroup {
@@ -88,6 +90,7 @@
 .home__bookReviewer {
   font-weight: bold;
   color: #0891b2;
+	word-break: break-word;
 }
 
 .home__bookMyReview {
