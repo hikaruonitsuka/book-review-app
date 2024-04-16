@@ -64,3 +64,12 @@ export const CreateBookReview = z.object({
 });
 
 export type CreateBookReviewType = z.infer<typeof CreateBookReview>;
+
+/**
+ * ユーザーの名前変更時のバリデーション
+ */
+export const UpdateUserName = z.object({
+  name: z.string().min(1, { message: 'ユーザー名を入力してください' }),
+});
+
+export type UpdateUserNameType = z.infer<typeof UpdateUserName>;

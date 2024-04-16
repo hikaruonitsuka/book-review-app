@@ -5,6 +5,7 @@ import CreateBookReviewPage from '@/pages/CreateBookReview';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
+import Profile from '@/pages/Profile';
 import SignUp from '@/pages/SignUp';
 import RouteAuthGuard from '@/router/RouteAuthGuard';
 
@@ -49,6 +50,10 @@ export const Router = () => {
                 redirect="/"
               />
             }
+          />
+          <Route
+            path="/profile"
+            element={<RouteAuthGuard component={<Profile />} redirect="/" />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
