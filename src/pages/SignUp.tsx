@@ -49,8 +49,16 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
+    // useFormのジェネリクスにはdefaultValuesの型を渡す
   } = useForm<SignUpSchemaType>({
+    // zodResolverの引数にvalidation時に実行するschemaを渡す
     resolver: zodResolver(SignUpSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+      file: undefined,
+    },
   });
 
   // ファイルを圧縮してプレビュー表示させる

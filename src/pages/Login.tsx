@@ -27,8 +27,14 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
+    // useFormのジェネリクスにはdefaultValuesの型を渡す
   } = useForm<LoginSchemaType>({
+    // zodResolverの引数にvalidation時に実行するschemaを渡す
     resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
   // サインイン処理
