@@ -55,12 +55,14 @@ export type LoginSchemaType = z.infer<typeof LoginSchema>;
  * 本のレビュー作成時のバリデーション
  */
 export const CreateBookReview = z.object({
-  title: z.string().min(1, { message: '本のタイトルを入力してください' }),
-  url: z.string().min(1, { message: '本のURLを入力してください' }),
+  title: z.string().min(1, { message: '書籍のタイトルを入力してください' }),
+  url: z.string().min(1, { message: '書籍のURLを入力してください' }),
   detail: z
     .string()
-    .min(1, { message: '本についてのレビューを入力してください' }),
-  review: z.string(),
+    .min(1, { message: '書籍についての詳細を入力してください' }),
+  review: z
+    .string()
+    .min(1, { message: '書籍についてのレビューを入力してください' }),
 });
 
 export type CreateBookReviewType = z.infer<typeof CreateBookReview>;

@@ -79,7 +79,7 @@ const Home = () => {
       <div className="home__bookList">
         {books.map((book: Book) => (
           <article className="home__bookItem" key={book.id}>
-            <Link to={`/books/${book.id}`} className="home__bookLink">
+            <Link to={`/detail/${book.id}`} className="home__bookLink">
               <div className="home__bookGroup">
                 <h2 className="home__bookTitle">{book.title}</h2>
                 <p className="home__bookDetail">{book.detail}</p>
@@ -101,13 +101,15 @@ const Home = () => {
           </article>
         ))}
       </div>
-      <div className="home__pagination">
-        <Pagination
-          offset={offset}
-          isLastPage={isLastPage}
-          isPenultimatePage={isPenultimatePage}
-        />
-      </div>
+      {
+        <div className="home__pagination">
+          <Pagination
+            offset={offset}
+            isLastPage={isLastPage}
+            isPenultimatePage={isPenultimatePage}
+          />
+        </div>
+      }
     </div>
   );
 };

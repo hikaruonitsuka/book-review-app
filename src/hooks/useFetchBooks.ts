@@ -8,11 +8,6 @@ type UseFetchBooksUrl = {
   token?: string;
 };
 
-const swrOptions = {
-  revalidateIfStale: false, // キャッシュがある場合に再検証しない
-  revalidateOnFocus: false, // ブラウザのタブ切り替え時に再検証しない
-};
-
 export const useFetchBooks = ({ url, offset, token }: UseFetchBooksUrl) => {
   // tokenでfetcherを分岐
   const fetcher = token
@@ -28,7 +23,6 @@ export const useFetchBooks = ({ url, offset, token }: UseFetchBooksUrl) => {
       ? [`${url}?offset=${offset * 10}`, token]
       : `${url}?offset=${offset * 10}`,
     fetcher,
-    swrOptions,
   );
 
   // 1ページ先のデータをプリフェッチ
@@ -39,7 +33,6 @@ export const useFetchBooks = ({ url, offset, token }: UseFetchBooksUrl) => {
         : `${url}?offset=${(offset + 1) * 10}`
       : null,
     fetcher,
-    swrOptions,
   );
 
   // 2ページ先のデータをプリフェッチ
@@ -50,7 +43,6 @@ export const useFetchBooks = ({ url, offset, token }: UseFetchBooksUrl) => {
         : `${url}?offset=${(offset + 2) * 10}`
       : null,
     fetcher,
-    swrOptions,
   );
 
   return { currentPageData, nextPageData, nextNextPageData, error, isLoading };

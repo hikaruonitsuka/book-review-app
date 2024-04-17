@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Layout from '@/components/Layout';
+import BookDetails from '@/pages/BookDetails';
 import CreateBookReviewPage from '@/pages/CreateBookReview';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
@@ -14,14 +15,9 @@ export const Router = () => {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route
-            path="/"
-            element={<RouteAuthGuard component={<Home />} redirect="/login" />}
-          />
-          <Route
-            path="/books"
-            element={<RouteAuthGuard component={<Home />} redirect="/login" />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/books" element={<Home />} />
+          <Route path="/detail/:id" element={<BookDetails />} />
           <Route
             path="/signup"
             element={
