@@ -42,7 +42,7 @@ const Pagination = ({ offset, isPenultimatePage, isLastPage }: Props) => {
   }
 
   return (
-    <ul className="flex items-center gap-x-8">
+    <ul className="flex items-center gap-x-2 sm:gap-x-8">
       {prevPageOffset >= 0 && (
         <li>
           <Link

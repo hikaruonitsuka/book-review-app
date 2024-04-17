@@ -29,9 +29,15 @@
 
 .home__bookList {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   grid-template-rows: 1fr;
   gap: 24px;
+}
+
+@media screen and (min-width: 640px) {
+  .home__bookList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .home__bookItem {
@@ -63,13 +69,19 @@
 
 .home__bookTitle {
   line-height: 1.35;
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: bold;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
   word-break: break-word;
+}
+
+@media screen and (min-width: 640px) {
+  .home__bookTitle {
+    font-size: 1.5em;
+  }
 }
 
 .home__bookDetail {
@@ -80,6 +92,13 @@
   -webkit-line-clamp: 3;
   overflow: hidden;
   word-break: break-word;
+  font-size: 0.875em;
+}
+
+@media screen and (min-width: 640px) {
+  .home__bookDetail {
+    font-size: 1em;
+  }
 }
 
 .home__bookReviewerGroup {
