@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useSearchParams } from 'react-router-dom';
 
+import axios from 'axios';
 import { ChevronRight } from 'lucide-react';
 
 import Pagination from '@/components/Pagination';
@@ -51,6 +52,25 @@ const Home = () => {
     }
   }, [nextPageData, nextNextPageData]);
 
+  // 本を選択した時にログを記録
+  const handleBookSelect = async (bookId: string) => {
+    try {
+      await axios.post(
+        `${API_URL}/logs`,
+        {
+          selectBookId: bookId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (error)
     return (
       <div className="home">
@@ -79,7 +99,11 @@ const Home = () => {
       <div className="home__bookList">
         {books.map((book: Book) => (
           <article className="home__bookItem" key={book.id}>
-            <Link to={`/detail/${book.id}`} className="home__bookLink">
+            <Link
+              onClick={() => handleBookSelect(book.id)}
+              to={`/detail/${book.id}`}
+              className="home__bookLink"
+            >
               <div className="home__bookGroup">
                 <h2 className="home__bookTitle">{book.title}</h2>
                 <p className="home__bookDetail">{book.detail}</p>
