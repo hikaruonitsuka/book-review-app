@@ -11,9 +11,16 @@ import { fetchWithToken } from '@/utils/fetcher';
 
 const BookDetails = () => {
   const params = useParams();
-  const id = params.id;
+  const detailId = params.id;
   const { isLogin } = useAuth();
   const [cookies] = useCookies(['token']);
+
+  const token = cookies.token;
+
+  const { data, error, isLoading } = useSWR(
+    token ? [`${API_URL}/books/${detailId}`, token] : null,
+    ([url, token]: [string, string]) => fetchWithToken(url, token),
+  );
 
   if (!isLogin) {
     return (
@@ -22,15 +29,6 @@ const BookDetails = () => {
       </div>
     );
   }
-
-  const token = cookies.token;
-
-  const { data, error, isLoading } = useSWR(
-    [`${API_URL}/books/${id}`, token],
-    ([url, token]: [string, string]) => fetchWithToken(url, token),
-  );
-
-  console.log(data);
 
   if (error)
     return (
@@ -47,9 +45,16 @@ const BookDetails = () => {
     );
   }
 
+  const { id, title, url, detail, review, reviewer } = data;
+
   return (
     <Container size="lg">
-      <p>テスト</p>
+      <p>{id}</p>
+      <p>{title}</p>
+      <p>{url}</p>
+      <p>{detail}</p>
+      <p>{review}</p>
+      <p>{reviewer}</p>
     </Container>
   );
 };
