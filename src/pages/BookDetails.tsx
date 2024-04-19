@@ -45,16 +45,34 @@ const BookDetails = () => {
     );
   }
 
-  const { id, title, url, detail, review, reviewer } = data;
+  const { title, url, detail, review, reviewer } = data;
 
   return (
-    <Container size="lg">
-      <p>{id}</p>
-      <p>{title}</p>
-      <p>{url}</p>
-      <p>{detail}</p>
-      <p>{review}</p>
-      <p>{reviewer}</p>
+    <Container>
+      <section className="flex flex-col gap-y-4">
+        <div className="flex flex-col">
+          <span className="text-sm font-bold">書籍タイトル</span>
+          <h2 className="border-b-2 border-gray-200 text-3xl font-bold">
+            {title}
+          </h2>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-sm font-bold">書籍へのURL</span>
+          <span>{url}</span>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-sm font-bold">書籍詳細</span>
+          <p>{detail}</p>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-sm font-bold">レビュー内容</span>
+          <p>{review}</p>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-sm font-bold">レビュー投稿者</span>
+          <p>{reviewer}</p>
+        </div>
+      </section>
     </Container>
   );
 };
