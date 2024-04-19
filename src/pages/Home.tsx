@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import axios from 'axios';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Pencil } from 'lucide-react';
 
 import Pagination from '@/components/Pagination';
 import ErrorText from '@/components/form/ErrorText';
@@ -117,10 +117,9 @@ const Home = () => {
               </div>
             </Link>
             {book.isMine && (
-              <div className="home__bookMyReview">
-                <span>My</span>
-                <span>Review</span>
-              </div>
+              <Link to={`/edit/${book.id}`} className="home__bookEdit">
+                <Pencil size={18} strokeWidth={2} color="#0891b2" fill="#fff" />
+              </Link>
             )}
           </article>
         ))}

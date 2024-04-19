@@ -112,20 +112,19 @@
   word-break: break-word;
 }
 
-.home__bookMyReview {
-  position: absolute;
-  top: -10px;
-  left: 16px;
-  line-height: 1;
-  font-size: 0.75em;
-  font-weight: bold;
-  background-color: #f97316;
-  color: #fff;
-  border-radius: 4px;
-  padding: 4px 8px;
-}
-
 .home__pagination {
   display: flex;
   justify-content: center;
+}
+
+.home__bookEdit {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  aspect-ratio: 1 / 1;
+  background-color: #0891b2;
+  border-radius: 100%;
 }
