@@ -14,6 +14,7 @@ export const useEditBookReview = () => {
   const params = useParams();
   const detailId = params.id;
 
+  const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   // レビューを編集する
@@ -31,11 +32,12 @@ export const useEditBookReview = () => {
           Authorization: `Bearer ${cookies.token}`,
         },
       });
+      setSuccess('レビューを編集しました！');
     } catch (error) {
+      console.error(error);
       setError('エラーが発生しました。もう一度お試しください。');
-      console.log(error);
     }
   };
 
-  return { editReview, error };
+  return { editReview, success, error };
 };
