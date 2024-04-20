@@ -10,13 +10,13 @@ import { API_URL } from '@/config';
 import { BookReviewType } from '@/utils/validation';
 
 export const useEditBookReview = () => {
-	const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(['token']);
   const params = useParams();
   const detailId = params.id;
 
-	const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-	// レビューを編集する
+  // レビューを編集する
   const editReview: SubmitHandler<BookReviewType> = async (data) => {
     try {
       const reviewData = {
