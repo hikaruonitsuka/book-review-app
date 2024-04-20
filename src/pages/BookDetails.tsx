@@ -1,26 +1,11 @@
-import { useCookies } from 'react-cookie';
-import { useParams } from 'react-router-dom';
-
-import useSWR from 'swr';
-
 import Container from '@/components/Container';
 import ErrorText from '@/components/form/ErrorText';
-import { API_URL } from '@/config';
+import { useFetchBookDetails } from '@/features/bookDetails/hooks/useFetchBookDetails';
 import { useAuth } from '@/hooks/useAuth';
-import { fetchWithToken } from '@/utils/fetcher';
 
 const BookDetails = () => {
-  const params = useParams();
-  const detailId = params.id;
   const { isLogin } = useAuth();
-  const [cookies] = useCookies(['token']);
-
-  const token = cookies.token;
-
-  const { data, error, isLoading } = useSWR(
-    token ? [`${API_URL}/books/${detailId}`, token] : null,
-    ([url, token]: [string, string]) => fetchWithToken(url, token),
-  );
+  const { data, error, isLoading } = useFetchBookDetails();
 
   if (!isLogin) {
     return (

@@ -1,71 +1,29 @@
-import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import { useCookies } from 'react-cookie';
-import { Link, useSearchParams } from 'react-router-dom';
-
-import axios from 'axios';
 import { ChevronRight, Pencil } from 'lucide-react';
 
-import Pagination from '@/components/Pagination';
 import ErrorText from '@/components/form/ErrorText';
-import { API_URL } from '@/config';
-import { useFetchBooks } from '@/hooks/useFetchBooks';
+import HomePagination from '@/features/home/HomePagination';
+import { useFetchBooks } from '@/features/home/hooks/useFetchBooks';
+import { useSendSelectedBookLog } from '@/features/home/hooks/useSendSelectedBookLog';
 import { Book } from '@/types/Book';
 
 const Home = () => {
-  // URLクエリパラメータからoffsetを取得
-  const [searchParams] = useSearchParams();
-  const offset = parseInt(searchParams.get('offset') || '0', 10);
-
-  // tokenを取得
-  const [cookies] = useCookies(['token']);
-  const token: string | undefined = cookies.token;
-
-  // useFetchBooksカスタムフックからoffsetとtokenを利用してデータを取得
   const {
     currentPageData: books,
-    nextPageData,
-    nextNextPageData,
     error,
     isLoading,
-  } = useFetchBooks({
-    url: token ? `${API_URL}/books` : `${API_URL}/public/books`,
-    offset: offset,
-    token: token,
-  });
+    offset,
+    isLastPage,
+    isPenultimatePage,
+  } = useFetchBooks();
 
-  // 最終ページと最終ページより1ページ前かどうかの状態を管理
-  const [isLastPage, setIsLastPage] = useState(false);
-  const [isPenultimatePage, setIsPenultimatePage] = useState(false);
-
-  useEffect(() => {
-    if (nextPageData && nextPageData.length === 0) {
-      setIsLastPage(true);
-    } else {
-      setIsLastPage(false);
-    }
-
-    if (nextNextPageData && nextNextPageData.length === 0) {
-      setIsPenultimatePage(true);
-    } else {
-      setIsPenultimatePage(false);
-    }
-  }, [nextPageData, nextNextPageData]);
+  const sendSelectedBookLog = useSendSelectedBookLog();
 
   // 本を選択した時にログを記録
   const handleBookSelect = async (bookId: string) => {
     try {
-      await axios.post(
-        `${API_URL}/logs`,
-        {
-          selectBookId: bookId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      await sendSelectedBookLog(bookId);
     } catch (error) {
       console.log(error);
     }
@@ -126,7 +84,7 @@ const Home = () => {
       </div>
       {
         <div className="home__pagination">
-          <Pagination
+          <HomePagination
             offset={offset}
             isLastPage={isLastPage}
             isPenultimatePage={isPenultimatePage}

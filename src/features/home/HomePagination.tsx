@@ -8,7 +8,7 @@ type Props = {
   isLastPage: boolean;
 };
 
-const Pagination = ({ offset, isPenultimatePage, isLastPage }: Props) => {
+const HomePagination = ({ offset, isPenultimatePage, isLastPage }: Props) => {
   const currentPage = offset + 1;
   const prevPageOffset = offset - 1;
   const nextPageOffset = offset + 1;
@@ -83,4 +83,4 @@ const Pagination = ({ offset, isPenultimatePage, isLastPage }: Props) => {
   );
 };
 
-export default Pagination;
+export default HomePagination;
