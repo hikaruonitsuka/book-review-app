@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import BookDetails from '@/pages/BookDetails';
 import CreateBookReviewPage from '@/pages/CreateBookReview';
+import EditBook from '@/pages/EditBook';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
@@ -18,6 +19,10 @@ export const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/books" element={<Home />} />
           <Route path="/detail/:id" element={<BookDetails />} />
+          <Route
+            path="/edit/:id"
+            element={<RouteAuthGuard component={<EditBook />} redirect="/" />}
+          />
           <Route
             path="/signup"
             element={
