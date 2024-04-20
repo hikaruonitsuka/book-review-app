@@ -15,7 +15,7 @@ import FormItem from '@/components/form/FormItem';
 import FormItemList from '@/components/form/FormItemList';
 import FormLabel from '@/components/form/FormLabel';
 import { API_URL } from '@/config';
-import { CreateBookReviewType, CreateBookReview } from '@/utils/validation';
+import { BookReviewType, BookReview } from '@/utils/validation';
 
 const CreateBookReviewPage = () => {
   const [error, setError] = useState<string | null>(null);
@@ -26,12 +26,12 @@ const CreateBookReviewPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateBookReviewType>({
-    resolver: zodResolver(CreateBookReview),
+  } = useForm<BookReviewType>({
+    resolver: zodResolver(BookReview),
   });
 
   // 新規レビューを作成する
-  const createReview: SubmitHandler<CreateBookReviewType> = async (data) => {
+  const createReview: SubmitHandler<BookReviewType> = async (data) => {
     try {
       const reviewData = {
         title: data.title,

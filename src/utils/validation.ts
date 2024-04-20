@@ -54,7 +54,7 @@ export type LoginSchemaType = z.infer<typeof LoginSchema>;
 /**
  * 本のレビュー作成時のバリデーション
  */
-export const CreateBookReview = z.object({
+export const BookReview = z.object({
   title: z.string().min(1, { message: '書籍のタイトルを入力してください' }),
   url: z.string().min(1, { message: '書籍のURLを入力してください' }),
   detail: z
@@ -65,7 +65,7 @@ export const CreateBookReview = z.object({
     .min(1, { message: '書籍についてのレビューを入力してください' }),
 });
 
-export type CreateBookReviewType = z.infer<typeof CreateBookReview>;
+export type BookReviewType = z.infer<typeof BookReview>;
 
 /**
  * ユーザーの名前変更時のバリデーション
