@@ -36,8 +36,8 @@ export const AuthProvider = ({ children }: Props) => {
     }
   }, [cookies.token]);
 
+  // トークンの存在によりログイン状態を判断
   const isLogin = useMemo(() => {
-    // トークンの存在によりログイン状態を判断
     return Boolean(cookies['token']);
   }, [cookies]);
 
