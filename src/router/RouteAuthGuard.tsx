@@ -11,11 +11,12 @@ type Props = {
 const RouteAuthGuard = ({ redirect, component, redirectIfLoggedIn }: Props) => {
   const { isLogin } = useAuth();
 
-  // ログイン状態に応じてリダイレクト
+  // ログインしていなければリダイレクト
   if (!isLogin && !redirectIfLoggedIn) {
     return <Navigate to={redirect} />;
   }
 
+  // ログインしている場合、リダイレクト
   if (isLogin && redirectIfLoggedIn) {
     return <Navigate to={redirect} />;
   }

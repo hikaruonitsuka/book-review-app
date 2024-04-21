@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [cookies] = useCookies(['token']);
   const [user, setUser] = useState<UserType | null>(null);
 
+  // ユーザー情報を取得する
   const fetchUser = useCallback(async () => {
     try {
       if (cookies.token) {
