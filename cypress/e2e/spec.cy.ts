@@ -1,7 +1,7 @@
 describe('サインイン', () => {
   it('を行う', () => {
     // サインインページへ移動
-    cy.visit('/signin');
+    cy.visit('/login');
 
     // メールアドレスとパスワードを入力
     cy.fixture('user').then((user) => {
