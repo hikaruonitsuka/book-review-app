@@ -3,7 +3,13 @@ import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { LogOut, MessageSquareDiff, UserCog } from 'lucide-react';
+import {
+  LogIn,
+  LogOut,
+  MessageSquareDiff,
+  UserCog,
+  UserPlus,
+} from 'lucide-react';
 
 import { useAuth } from '@/hooks/useAuth';
 
@@ -51,7 +57,16 @@ const Header = () => {
             </button>
           </div>
         ) : (
-          <Link to="/login">ログイン</Link>
+          <div className="flex items-center gap-x-4 sm:gap-x-8">
+            <Link to="/signup" className="flex items-center gap-x-2">
+              <UserPlus strokeWidth={2} size={20} />
+              <span className="text-sm font-bold">新規登録</span>
+            </Link>
+            <Link to="/login" className="flex items-center gap-x-2">
+              <LogIn strokeWidth={2} size={20} />
+              <span className="text-sm font-bold">ログイン</span>
+            </Link>
+          </div>
         )}
       </div>
     </header>
