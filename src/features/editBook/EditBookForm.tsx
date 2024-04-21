@@ -2,6 +2,8 @@ import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useDeleteBookReview } from './hooks/useDeleteBookReview';
+
 import Button from '@/components/Button';
 import ErrorText from '@/components/form/ErrorText';
 import FormContainer from '@/components/form/FormContainer';
@@ -26,7 +28,11 @@ const EditBookForm = ({ defaultValues }: Props) => {
     resolver: zodResolver(BookReview),
   });
 
+  // レビュー編集用のカスタムフック
   const { editReview, success, error } = useEditBookReview();
+
+  // レビュー削除用のカスタムフック
+  const { handleDeleteReview } = useDeleteBookReview();
 
   return (
     <div className="flex flex-col gap-y-4">
@@ -89,7 +95,12 @@ const EditBookForm = ({ defaultValues }: Props) => {
             </div>
           </FormItem>
         </FormItemList>
-        <Button>レビューを編集</Button>
+        <div className="flex gap-x-10">
+          <Button>レビューを編集</Button>
+          <Button color="danger" onClick={handleDeleteReview}>
+            レビューを削除
+          </Button>
+        </div>
       </FormContainer>
     </div>
   );
