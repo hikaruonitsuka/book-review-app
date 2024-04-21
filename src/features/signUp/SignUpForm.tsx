@@ -116,7 +116,7 @@ const SignUpForm = () => {
       console.log(error);
     }
   };
-	
+
   return (
     <FormContainer onSubmit={handleSubmit(onSignUp)}>
       <FormItemList>

@@ -82,15 +82,13 @@ const Home = () => {
           </article>
         ))}
       </div>
-      {
-        <div className="home__pagination">
-          <HomePagination
-            offset={offset}
-            isLastPage={isLastPage}
-            isPenultimatePage={isPenultimatePage}
-          />
-        </div>
-      }
+      <div className="home__pagination">
+        <HomePagination
+          offset={offset}
+          isLastPage={isLastPage}
+          isPenultimatePage={isPenultimatePage}
+        />
+      </div>
     </div>
   );
 };
