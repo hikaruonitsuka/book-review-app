@@ -6,9 +6,11 @@ import ErrorText from '@/components/form/ErrorText';
 import HomePagination from '@/features/home/HomePagination';
 import { useFetchBooks } from '@/features/home/hooks/useFetchBooks';
 import { useSendSelectedBookLog } from '@/features/home/hooks/useSendSelectedBookLog';
+import { useAuth } from '@/hooks/useAuth';
 import { Book } from '@/types/Book';
 
 const Home = () => {
+  const { isLogin } = useAuth();
   const {
     currentPageData: books,
     error,
@@ -58,7 +60,7 @@ const Home = () => {
         {books.map((book: Book) => (
           <article className="home__bookItem" key={book.id}>
             <Link
-              onClick={() => handleBookSelect(book.id)}
+              onClick={isLogin ? () => handleBookSelect(book.id) : undefined}
               to={`/detail/${book.id}`}
               className="home__bookLink"
             >
