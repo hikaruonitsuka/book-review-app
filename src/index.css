@@ -108,7 +108,7 @@
 
 .home__bookReviewer {
   font-weight: bold;
-  color: #0891b2;
+  color: #155e75;
   word-break: break-word;
 }
 
@@ -125,6 +125,6 @@
   place-items: center;
   width: 24px;
   aspect-ratio: 1 / 1;
-  background-color: #0891b2;
+  background-color: #155e75;
   border-radius: 100%;
 }

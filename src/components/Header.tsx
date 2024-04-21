@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header className="py-4">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4">
-        <h1 className="font-bold text-cyan-600">
+        <h1 className="font-bold text-cyan-800">
           <Link to="/">BOOK REVIEW APP</Link>
         </h1>
         {isLogin ? (

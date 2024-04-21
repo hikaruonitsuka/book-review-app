@@ -42,44 +42,48 @@ const HomePagination = ({ offset, isPenultimatePage, isLastPage }: Props) => {
   }
 
   return (
-    <ul className="flex items-center gap-x-2 sm:gap-x-8">
-      {prevPageOffset >= 0 && (
-        <li>
-          <Link
-            className="grid aspect-square w-10 place-items-center"
-            to={`/books?offset=${prevPageOffset}`}
-          >
-            <ChevronLeft size={16} strokeWidth={2} />
-          </Link>
-        </li>
-      )}
-      {filteredPageNumbers.map((pageNumber) => (
-        <li key={pageNumber}>
-          {pageNumber === currentPage ? (
-            <span className="grid aspect-square w-10 place-items-center rounded-full bg-gray-100">
-              {pageNumber}
-            </span>
-          ) : (
+    <nav>
+      <ol className="flex items-center gap-x-2 sm:gap-x-8">
+        {prevPageOffset >= 0 && (
+          <li>
             <Link
               className="grid aspect-square w-10 place-items-center"
-              to={`/books?offset=${pageNumber - 1}`}
+              to={`/books?offset=${prevPageOffset}`}
             >
-              {pageNumber}
+              <ChevronLeft size={16} strokeWidth={2} />
+              <span className="sr-only">前のページへ戻る</span>
             </Link>
-          )}
-        </li>
-      ))}
-      {!isLastPage && (
-        <li>
-          <Link
-            className="grid aspect-square w-10 place-items-center"
-            to={`/books?offset=${nextPageOffset}`}
-          >
-            <ChevronRight size={16} strokeWidth={2} />
-          </Link>
-        </li>
-      )}
-    </ul>
+          </li>
+        )}
+        {filteredPageNumbers.map((pageNumber) => (
+          <li key={pageNumber}>
+            {pageNumber === currentPage ? (
+              <span className="grid aspect-square w-10 place-items-center rounded-full bg-gray-100">
+                {pageNumber}
+              </span>
+            ) : (
+              <Link
+                className="grid aspect-square w-10 place-items-center"
+                to={`/books?offset=${pageNumber - 1}`}
+              >
+                {pageNumber}
+              </Link>
+            )}
+          </li>
+        ))}
+        {!isLastPage && (
+          <li>
+            <Link
+              className="grid aspect-square w-10 place-items-center"
+              to={`/books?offset=${nextPageOffset}`}
+            >
+              <ChevronRight size={16} strokeWidth={2} />
+              <span className="sr-only">次のページへ進む</span>
+            </Link>
+          </li>
+        )}
+      </ol>
+    </nav>
   );
 };
 

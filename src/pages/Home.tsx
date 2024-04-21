@@ -76,7 +76,7 @@ const Home = () => {
             </Link>
             {book.isMine && (
               <Link to={`/edit/${book.id}`} className="home__bookEdit">
-                <Pencil size={18} strokeWidth={2} color="#0891b2" fill="#fff" />
+                <Pencil size={18} strokeWidth={2} color="#155e75" fill="#fff" />
               </Link>
             )}
           </article>
