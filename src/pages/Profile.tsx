@@ -13,9 +13,7 @@ const Profile = () => {
     <div className="grid min-h-full place-items-center">
       <Container size="sm">
         <section className="flex w-full flex-col gap-y-14">
-          <h2 className="text-center text-2xl font-bold">
-            ユーザーネームの変更
-          </h2>
+          <h2 className="text-center text-2xl font-bold">ユーザー名の変更</h2>
           <ProfileForm defaultValues={user} />
         </section>
       </Container>

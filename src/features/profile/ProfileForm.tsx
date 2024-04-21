@@ -11,6 +11,7 @@ import ErrorText from '@/components/form/ErrorText';
 import FormContainer from '@/components/form/FormContainer';
 import FormItem from '@/components/form/FormItem';
 import FormItemList from '@/components/form/FormItemList';
+import SuccessText from '@/components/form/SuccessText';
 import { API_URL } from '@/config';
 import { useAuth } from '@/hooks/useAuth';
 import { UpdateUserNameType, UpdateUserName } from '@/utils/validation';
@@ -22,6 +23,7 @@ type Props = {
 const ProfileForm = ({ defaultValues }: Props) => {
   const { user, setUser } = useAuth();
   const [cookies] = useCookies(['token']);
+  const [success, setSuccess] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const {
@@ -53,14 +55,16 @@ const ProfileForm = ({ defaultValues }: Props) => {
           ...user,
           name: response.data.name,
         });
+        setSuccess('ユーザー名を変更しました！');
       }
     } catch (error) {
-      setError('ユーザーネームの変更に失敗しました。');
+      setError('ユーザー名の変更に失敗しました。');
       console.log(error);
     }
   };
   return (
     <div className="flex flex-col gap-y-4">
+      {success && <SuccessText>{success}</SuccessText>}
       {error && <ErrorText>{error}</ErrorText>}
       <FormContainer onSubmit={handleSubmit(onChangeName)}>
         <FormItemList>
