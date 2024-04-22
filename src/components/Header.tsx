@@ -23,6 +23,7 @@ const Header = () => {
     fetchUser();
   }, [fetchUser]);
 
+	// ログアウト処理
   const logout = () => {
     removeCookie('token', { path: '/' });
     setUser(null);
