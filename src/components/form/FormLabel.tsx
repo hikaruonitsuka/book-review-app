@@ -1,9 +1,7 @@
-type Props = {
-  htmlFor: string;
-  children: React.ReactNode;
-};
-
-const FormLabel = ({ children, htmlFor }: Props) => {
+const FormLabel = ({
+  children,
+  htmlFor,
+}: React.LabelHTMLAttributes<HTMLLabelElement>) => {
   return (
     <label className="font-bold" htmlFor={htmlFor}>
       {children}

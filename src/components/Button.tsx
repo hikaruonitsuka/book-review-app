@@ -3,14 +3,13 @@ import clsx from 'clsx';
 type Props = {
   type?: 'submit' | 'button';
   color?: 'normal' | 'danger';
-  children: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
   type = 'submit',
   color = 'normal',
   children,
-  ...rest
+  ...props
 }: Props) => {
   return (
     <button
@@ -20,7 +19,7 @@ const Button = ({
       })}
       type={type}
       data-cy={type}
-      {...rest}
+      {...props}
     >
       {children}
     </button>
