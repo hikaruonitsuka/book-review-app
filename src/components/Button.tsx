@@ -9,7 +9,7 @@ const Button = ({
   type = 'submit',
   color = 'normal',
   children,
-  ...props
+  ...rest
 }: Props) => {
   return (
     <button
@@ -19,7 +19,7 @@ const Button = ({
       })}
       type={type}
       data-cy={type}
-      {...props}
+      {...rest}
     >
       {children}
     </button>
