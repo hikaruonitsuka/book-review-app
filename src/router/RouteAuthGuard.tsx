@@ -5,19 +5,19 @@ import { useAuth } from '@/hooks/useAuth';
 type Props = {
   redirect: string;
   component: React.ReactNode;
-  redirectIfLoggedIn?: boolean;
+  redirectIfLogin?: boolean;
 };
 
-const RouteAuthGuard = ({ redirect, component, redirectIfLoggedIn }: Props) => {
+const RouteAuthGuard = ({ redirect, component, redirectIfLogin }: Props) => {
   const { isLogin } = useAuth();
 
   // ログインしていなければリダイレクト
-  if (!isLogin && !redirectIfLoggedIn) {
+  if (!isLogin && !redirectIfLogin) {
     return <Navigate to={redirect} />;
   }
 
   // ログインしている場合、リダイレクト
-  if (isLogin && redirectIfLoggedIn) {
+  if (isLogin && redirectIfLogin) {
     return <Navigate to={redirect} />;
   }
   return <>{component}</>;

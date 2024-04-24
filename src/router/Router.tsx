@@ -29,7 +29,7 @@ export const Router = () => {
               <RouteAuthGuard
                 component={<SignUp />}
                 redirect="/"
-                redirectIfLoggedIn={true}
+                redirectIfLogin={true}
               />
             }
           />
@@ -39,7 +39,7 @@ export const Router = () => {
               <RouteAuthGuard
                 component={<Login />}
                 redirect="/"
-                redirectIfLoggedIn={true}
+                redirectIfLogin={true}
               />
             }
           />
