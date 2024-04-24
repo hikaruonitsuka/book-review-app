@@ -37,7 +37,7 @@ const Header = () => {
           <Link to="/">BOOK REVIEW APP</Link>
         </h1>
         {isLogin ? (
-          <div className="flex items-center gap-x-6 sm:gap-x-10">
+          <div className="flex items-center gap-x-4 sm:gap-x-10">
             <div className="font-bold text-orange-600">{user?.name}</div>
             <div className="flex items-center gap-x-4">
               <Link to="/new" className="flex items-center gap-x-2">
