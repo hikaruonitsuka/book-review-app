@@ -41,6 +41,7 @@ const compressFile = (file: File): Promise<File> => {
 const SignUpForm = () => {
   const [, setCookie] = useCookies(['token']);
   const [previewUrl, setPreviewUrl] = useState<string>('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -113,84 +114,93 @@ const SignUpForm = () => {
 
       navigate('/');
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data.ErrorMessageJP);
+        console.error(error);
+      } else {
+        setError('予期せぬエラーが発生しました');
+        console.error(error);
+      }
     }
   };
 
   return (
-    <FormContainer onSubmit={handleSubmit(onSignUp)}>
-      <FormItemList>
-        <FormItem>
-          <FormLabel htmlFor="name">ユーザー名</FormLabel>
-          <div className="flex w-full flex-col gap-y-1">
-            <input
-              className="w-full rounded border px-2 py-1"
-              type="text"
-              id="name"
-              autoComplete="username"
-              {...register('name')}
-            />
-            {errors.name?.message && (
-              <ErrorText>{errors.name?.message}</ErrorText>
-            )}
-          </div>
-        </FormItem>
-        <FormItem>
-          <FormLabel htmlFor="email">メールアドレス</FormLabel>
-          <div className="flex w-full flex-col gap-y-1">
-            <input
-              className="w-full rounded border px-2 py-1"
-              type="email"
-              id="email"
-              autoComplete="email"
-              {...register('email')}
-            />
-            {errors.email?.message && (
-              <ErrorText>{errors.email?.message}</ErrorText>
-            )}
-          </div>
-        </FormItem>
-        <FormItem>
-          <FormLabel htmlFor="password">パスワード</FormLabel>
-          <div className="flex w-full flex-col gap-y-1">
-            <input
-              className="w-full rounded border px-2 py-1"
-              type="password"
-              id="password"
-              autoComplete="new-password"
-              {...register('password')}
-            />
-            {errors.password?.message && (
-              <ErrorText>{errors.password?.message}</ErrorText>
-            )}
-          </div>
-        </FormItem>
-        <FormItem>
-          <FormLabel htmlFor="file">アイコン</FormLabel>
-          <div className="flex flex-col gap-y-1">
-            {previewUrl && (
-              <div className="aspect-square w-[100px] overflow-hidden rounded-full">
-                <img
-                  className="object-cover"
-                  src={previewUrl}
-                  alt="アイコンプレビュー"
-                />
-              </div>
-            )}
-            <input
-              id="file"
-              type="file"
-              accept=".jpg, .jpeg, .png"
-              {...register('file', { onChange: onFileChange })}
-            />
-            {errors.file?.message && (
-              <ErrorText>{errors.file?.message}</ErrorText>
-            )}
-          </div>
-        </FormItem>
-      </FormItemList>
-      <Button>作成する</Button>
-    </FormContainer>
+    <div className="flex flex-col gap-y-4">
+      {error && <ErrorText>{error}</ErrorText>}
+      <FormContainer onSubmit={handleSubmit(onSignUp)}>
+        <FormItemList>
+          <FormItem>
+            <FormLabel htmlFor="name">ユーザー名</FormLabel>
+            <div className="flex w-full flex-col gap-y-1">
+              <input
+                className="w-full rounded border px-2 py-1"
+                type="text"
+                id="name"
+                autoComplete="username"
+                {...register('name')}
+              />
+              {errors.name?.message && (
+                <ErrorText>{errors.name?.message}</ErrorText>
+              )}
+            </div>
+          </FormItem>
+          <FormItem>
+            <FormLabel htmlFor="email">メールアドレス</FormLabel>
+            <div className="flex w-full flex-col gap-y-1">
+              <input
+                className="w-full rounded border px-2 py-1"
+                type="email"
+                id="email"
+                autoComplete="email"
+                {...register('email')}
+              />
+              {errors.email?.message && (
+                <ErrorText>{errors.email?.message}</ErrorText>
+              )}
+            </div>
+          </FormItem>
+          <FormItem>
+            <FormLabel htmlFor="password">パスワード</FormLabel>
+            <div className="flex w-full flex-col gap-y-1">
+              <input
+                className="w-full rounded border px-2 py-1"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+                {...register('password')}
+              />
+              {errors.password?.message && (
+                <ErrorText>{errors.password?.message}</ErrorText>
+              )}
+            </div>
+          </FormItem>
+          <FormItem>
+            <FormLabel htmlFor="file">アイコン</FormLabel>
+            <div className="flex flex-col gap-y-1">
+              {previewUrl && (
+                <div className="aspect-square w-[100px] overflow-hidden rounded-full">
+                  <img
+                    className="object-cover"
+                    src={previewUrl}
+                    alt="アイコンプレビュー"
+                  />
+                </div>
+              )}
+              <input
+                id="file"
+                type="file"
+                accept=".jpg, .jpeg, .png"
+                {...register('file', { onChange: onFileChange })}
+              />
+              {errors.file?.message && (
+                <ErrorText>{errors.file?.message}</ErrorText>
+              )}
+            </div>
+          </FormItem>
+        </FormItemList>
+        <Button>作成する</Button>
+      </FormContainer>
+    </div>
   );
 };
 
